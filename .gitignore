@@ -28,6 +28,11 @@ Thumbs.db
 deployment/
 *.zip
 
+# Sync Scripts (keep these in repo)
+# sync-to-github.bat
+# sync-to-github.ps1
+# كيفية_استخدام_المزامنة.md
+
 # Misc
 composer.phar
 *.sqlite
