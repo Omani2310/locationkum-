@@ -1,61 +1,110 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 لوكيشنكم للشحن والتوصيل
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+نظام إدارة متكامل لشركة لوكيشنكم للشحن والتوصيل، مبني باستخدام Laravel و Tailwind CSS.
 
-## About Laravel
+## ✨ المميزات
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- 🎨 **تصميم تفاعلي**: واجهة مستخدم حديثة وجذابة
+- 📱 **متجاوب**: يعمل على جميع الأجهزة
+- 🔐 **نظام تسجيل دخول**: آمن ومحمي
+- 📊 **لوحة تحكم**: إحصائيات وتقارير شاملة
+- 🌐 **دعم اللغة العربية**: واجهة باللغة العربية بالكامل
+- ⚡ **أداء عالي**: محسن للسرعة والأداء
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠️ التقنيات المستخدمة
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend**: Laravel 11
+- **Frontend**: Tailwind CSS, JavaScript
+- **Database**: MySQL
+- **Build Tool**: Vite
+- **Icons**: Font Awesome
 
-## Learning Laravel
+## 🚀 النشر التلقائي
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+تم إعداد GitHub Actions للنشر التلقائي على Hostinger:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 📋 متطلبات النشر
+- PHP 8.2+
+- MySQL 5.7+
+- Composer
+- Node.js 18+
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🔄 كيفية النشر
+1. **تحديث الكود**: عند عمل push إلى فرع `main`
+2. **بناء تلقائي**: GitHub Actions يقوم ببناء المشروع
+3. **حزمة النشر**: يتم إنشاء `locationkum-deployment.zip`
+4. **تحميل الحزمة**: من تبويب Actions في المستودع
+5. **رفع على Hostinger**: فك الضغط في مجلد `public_html`
 
-## Laravel Sponsors
+### 📦 ملفات النشر
+- `locationkum-deployment.zip` - حزمة النشر الكاملة
+- `DEPLOYMENT_INSTRUCTIONS.md` - تعليمات مفصلة للنشر
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🏃‍♂️ التشغيل المحلي
 
-### Premium Partners
+### 1. تثبيت المتطلبات
+```bash
+composer install
+npm install
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2. إعداد البيئة
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-## Contributing
+### 3. إعداد قاعدة البيانات
+```bash
+php artisan migrate
+php artisan db:seed
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. بناء الأصول
+```bash
+npm run build
+```
 
-## Code of Conduct
+### 5. تشغيل الخادم
+```bash
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🔑 بيانات تسجيل الدخول
 
-## Security Vulnerabilities
+- **البريد الإلكتروني**: `admin@locationkum.net`
+- **كلمة المرور**: `123`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 📁 هيكل المشروع
 
-## License
+```
+Locationkum.net/
+├── app/                    # منطق التطبيق
+├── config/                 # ملفات الإعدادات
+├── database/               # قاعدة البيانات والـ Seeders
+├── public_html/            # المجلد العام (Document Root)
+├── resources/              # الموارد (CSS, JS, Views)
+├── routes/                 # مسارات التطبيق
+├── storage/                # الملفات المؤقتة
+└── .github/workflows/      # GitHub Actions
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🌐 الروابط
+
+- **الموقع**: https://locationkum.net
+- **لوحة التحكم**: https://locationkum.net/dashboard
+- **تسجيل الدخول**: https://locationkum.net/login
+
+## 📞 الدعم
+
+للمساعدة والدعم:
+- **واتساب**: 76888879
+- **البريد الإلكتروني**: care@locationkum.net
+
+## 📄 الترخيص
+
+هذا المشروع مملوك لشركة لوكيشنكم للشحن والتوصيل.
+
+---
+
+**تم التطوير بواسطة فريق لوكيشنكم** 🚀
