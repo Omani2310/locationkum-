@@ -429,4 +429,3 @@ input:where([type=button], [type=reset], [type=submit]) {
   inherits: false;
   initial-value: 1;
 }
-
