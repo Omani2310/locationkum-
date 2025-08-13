@@ -1,0 +1,85 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, openssl, tokenizer, json, bcmath, curl, zip, gd
+        coverage: none
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install Composer dependencies
+      run: composer install --no-dev --optimize-autoloader
+      
+    - name: Install NPM dependencies
+      run: npm ci
+      
+    - name: Build assets
+      run: npm run build
+      
+    - name: Create deployment package
+      run: |
+        mkdir -p deployment
+        rsync -av --exclude='.git' --exclude='node_modules' --exclude='storage/logs/*' --exclude='storage/framework/cache/*' --exclude='storage/framework/sessions/*' --exclude='storage/framework/views/*' --exclude='tests' --exclude='.env.example' --exclude='README.md' --exclude='CHANGELOG.md' --exclude='.github' --exclude='.gitignore' --exclude='.gitattributes' --exclude='.editorconfig' --exclude='.styleci.yml' --exclude='phpunit.xml' --exclude='composer.lock' --exclude='package-lock.json' --exclude='vite.config.js' --exclude='tailwind.config.js' --exclude='postcss.config.js' --exclude='resources/css/app.css' --exclude='resources/js/app.js' --exclude='resources/js/bootstrap.js' ./ deployment/
+        
+        echo "APP_NAME=Locationkum" > deployment/.env
+        echo "APP_ENV=production" >> deployment/.env
+        echo "APP_KEY=" >> deployment/.env
+        echo "APP_DEBUG=false" >> deployment/.env
+        echo "APP_URL=https://locationkum.net" >> deployment/.env
+        echo "LOG_CHANNEL=stack" >> deployment/.env
+        echo "LOG_DEPRECATIONS_CHANNEL=null" >> deployment/.env
+        echo "LOG_LEVEL=debug" >> deployment/.env
+        echo "DB_CONNECTION=mysql" >> deployment/.env
+        echo "DB_HOST=localhost" >> deployment/.env
+        echo "DB_PORT=3306" >> deployment/.env
+        echo "DB_DATABASE=u231669320_db" >> deployment/.env
+        echo "DB_USERNAME=u231669320_us" >> deployment/.env
+        echo "DB_PASSWORD=!#Oman2310" >> deployment/.env
+        echo "BROADCAST_DRIVER=log" >> deployment/.env
+        echo "CACHE_DRIVER=file" >> deployment/.env
+        echo "FILESYSTEM_DISK=local" >> deployment/.env
+        echo "QUEUE_CONNECTION=sync" >> deployment/.env
+        echo "SESSION_DRIVER=file" >> deployment/.env
+        echo "SESSION_LIFETIME=120" >> deployment/.env
+        
+        cd deployment
+        zip -r ../locationkum-deployment.zip .
+        cd ..
+        
+    - name: Upload deployment package
+      uses: actions/upload-artifact@v4
+      with:
+        name: locationkum-deployment
+        path: locationkum-deployment.zip
+        
+    - name: Create deployment summary
+      run: |
+        echo "## 🚀 حزمة النشر جاهزة!" >> $GITHUB_STEP_SUMMARY
+        echo "تم إنشاء حزمة النشر بنجاح!" >> $GITHUB_STEP_SUMMARY
+        echo "### 📦 الملفات المرفقة:" >> $GITHUB_STEP_SUMMARY
+        echo "- locationkum-deployment.zip - حزمة النشر الكاملة" >> $GITHUB_STEP_SUMMARY
+        echo "### 🔧 خطوات النشر:" >> $GITHUB_STEP_SUMMARY
+        echo "1. تحميل locationkum-deployment.zip" >> $GITHUB_STEP_SUMMARY
+        echo "2. فك الضغط في مجلد public_html على Hostinger" >> $GITHUB_STEP_SUMMARY
+        echo "3. تشغيل أوامر Composer و Artisan" >> $GITHUB_STEP_SUMMARY
+        echo "4. اختبار الموقع" >> $GITHUB_STEP_SUMMARY

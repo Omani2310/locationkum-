@@ -24,6 +24,10 @@ Thumbs.db
 # Build outputs
 /public_html/build/
 
+# Deployment
+deployment/
+*.zip
+
 # Misc
 composer.phar
 *.sqlite
